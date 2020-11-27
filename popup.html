@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="flex flex-col justify-center">
+    <img src="./icon128.png" alt="" class="w-24 h-24 mx-auto mt-4 mx-4" />
+    <h1 class="text-center text-lg font-light">
+      Clean some brain memory. <br />
+      Stay focused and stop procrastinating.
+    </h1>
+    <div class="flex flex-col justify-center m-8">
+      <div class="flex">
+        <input
+          id="inputVal"
+          type="text"
+          placeholder="Add a website"
+          class="p-2 rounded-l-md border border-indigo-500 focus:ring focus:outline-none focus:ring-blue-200"
+        />
+        <button
+          id="save"
+          class="bg-indigo-500 rounded-r focus:select-none p-2 text-white border border-indigo-500 font-semibold"
+        >
+          ADD
+        </button>
+      </div>
+      <p class="text-gray-500 text-xs text-center">
+        Without https://www and / <br />
+        example : google.com
+      </p>
+    </div>
+
+    <ul id="itemlist" class="flex flex-col w-1/2 mx-auto text-gray-900"></ul>
+
+    <div class="flex flex-col justify-center">
+      <button
+        id="reload"
+        class="bg-indigo-500 flex items-center p-4 uppercase shadow-md text-white text-xl rounded-md mx-auto m-4 transform duration-150 ease-in-out hover:shadow-lg hover:scale-105"
+      >
+        RELOAD
+        <svg
+          class="fill-current text-white mx-2"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M13.5 2c-5.629 0-10.212 4.436-10.475 10h-3.025l4.537 5.917 4.463-5.917h-2.975c.26-3.902 3.508-7 7.475-7 4.136 0 7.5 3.364 7.5 7.5s-3.364 7.5-7.5 7.5c-2.381 0-4.502-1.119-5.876-2.854l-1.847 2.449c1.919 2.088 4.664 3.405 7.723 3.405 5.798 0 10.5-4.702 10.5-10.5s-4.702-10.5-10.5-10.5z"
+          />
+        </svg>
+      </button>
+      <p class="text-gray-500 text-xs text-center">
+        Reload the app when you add a new website
+      </p>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
+
+<!-- 
+
+    - L'utilisateur installe l'extension
+    - il choisis des sites à bloquer lors de la premiére ouverture -Une liste pré-définis peut être proposé (Linkedin, Facebook, Twitter, Gmail, Youtube, etc... )
+    - Il choisi le nombre de temps maximum / jour (1H par défauts)
+    - Une fois valider, il peut par la suite rajouter des sites
+    - Une fois valider, l'extension doit s'activer toute seule
+    - Si l'utilisateur passe plus d'une heure de son temps sur les sites, alors ces derniers sont bloqués (via une rediraction)
+    - A 00h, le compteur repasse à 0
+
+
+-->
