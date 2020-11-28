@@ -1,7 +1,5 @@
-// var app = chrome.runtime.getBackgroundPage();
-
-let log;
-const myURLsRedirect = [];
+let log; // Input from user
+const myURLsRedirect = []; // List of websites add by user
 
 document.querySelector("#inputVal").addEventListener("keyup", updateValue);
 
@@ -11,7 +9,6 @@ function updateValue(e) {
 
 // When user click on "Add"
 function setWebsite() {
-  console.log(log);
   chrome.storage.local.get(function (result) {
     if (
       typeof result["websites"] !== "undefined" &&
