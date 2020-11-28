@@ -8,7 +8,9 @@ If you spend more than 1 hour procrastinating on unproductive websites, the exte
 
 ## How to
 
-This extension is currently under review in the Chrome Dev Store.
+![How To 1 hour extension](/howto.gif)
+
+❗ This extension is currently under review in the Chrome Dev Store. ❗
 
 To install this extension, clone or fork this repo. Once downloaded, go to [chrome://extensions](chrome://extensions) and drag and drop the "app" folder.
 
