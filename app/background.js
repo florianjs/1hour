@@ -88,11 +88,10 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
   if (tabToUrl[tabId] === undefined) return;
   // If the tab is in tabToUrl
-  /** 
+
   if (myURLs.some((url) => tabToUrl[tabId].includes(url))) {
     currentlyCounting = false;
-  } 
-  **/
+  }
 
   // Remove information for non-existent tab
   delete tabToUrl[tabId];
