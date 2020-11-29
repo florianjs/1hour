@@ -22,11 +22,13 @@ Once installed, open the extension, add unproductive websites to your list, and 
 
 All contributors will be part of the "Wall of fame," with their names and links to their GH account.
 
-To contribute, fork this repo and then create a PR.
+To contribute, fork this repo and then create a PR **on the dev branch**.
+
 Once cloned, don't forget to run `npm i`
 
 - Check opened issues
 - Issues / PR / Comments NEEDS to be in plain English
+- PR on **dev branch**
 
 # Wall of fame
 
@@ -34,3 +36,4 @@ Once cloned, don't forget to run `npm i`
 
 <a href="https://github.com/arthureichelberger"><img src="https://avatars2.githubusercontent.com/u/35616365?s=460&u=0edebf2c5920474ab0dff4953fd41d2b9b0bfd6b&v=4" alt="Arthur EICHELBERGER" width="100"/></a>
 <a href="https://github.com/Icesofty"><img src="https://avatars1.githubusercontent.com/u/52180080?s=460&u=5ff4db3ace5050d8bd38cb01338df3e17cfe830e&v=4" alt="Florian ARGAUD" width="100"/></a>
+<a href="https://github.com/qtbrin"><img src="https://avatars2.githubusercontent.com/u/75215560?s=460&v=4" alt="qtbrin" width="100"/></a>
