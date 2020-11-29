@@ -18,13 +18,13 @@ let currentlyCounting = false; // Start / Stop interval
  * the myURLs & myURLsRedirect variables.
  */
 (async () => {
-  const websites = await storage.getItem("websites");
-  let time = (await storage.getItem("time")) || 0; // Time spent on myURLs
+  const websites = await storage.getItem('websites');
+  let time = (await storage.getItem('time')) || 0; // Time spent on myURLs
 
   if (websites instanceof Array) {
     websites.forEach((website) => {
       myURLs.push(website);
-      myURLsRedirect.push("*://*." + website + "/*");
+      myURLsRedirect.push('*://*.' + website + '/*');
     });
 
     chrome.webRequest.onBeforeRequest.addListener(
@@ -33,35 +33,35 @@ let currentlyCounting = false; // Start / Stop interval
         if (time > 3600) {
           return {
             // Redirect
-            redirectUrl: "https://one-hour-long.glitch.me/"
+            redirectUrl: 'https://one-hour-long.glitch.me/'
           };
         }
       },
       {
         urls: [...myURLsRedirect], // Redirect only URLs add by the user
         types: [
-          "main_frame",
-          "sub_frame",
-          "stylesheet",
-          "script",
-          "image",
-          "object",
-          "xmlhttprequest",
-          "other"
+          'main_frame',
+          'sub_frame',
+          'stylesheet',
+          'script',
+          'image',
+          'object',
+          'xmlhttprequest',
+          'other'
         ]
       },
-      ["blocking"]
+      ['blocking']
     );
   } else {
     // If "websites" doesn't exist in Local Storage
-    myURLs = ["facebook.com", "twitter.com"];
-    myURLsRedirect = ["*://*.facebook.com/*", "*://*.twitter.com/*"];
+    myURLs = ['facebook.com', 'twitter.com'];
+    myURLsRedirect = ['*://*.facebook.com/*', '*://*.twitter.com/*'];
   }
 
   // Everytime a Tab is updated
   chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (
-      changeInfo.status == "complete" &&
+      changeInfo.status == 'complete' &&
       myURLs.some((url) => tab.url.includes(url)) && // Check if current Tab URL is in myURLs
       currentlyCounting == false // If the interval is not already launched
     ) {
@@ -73,7 +73,7 @@ let currentlyCounting = false; // Start / Stop interval
       }, 1000);
     }
     if (
-      changeInfo.status == "complete" &&
+      changeInfo.status == 'complete' &&
       myURLs.some((url) => tab.url.includes(url)) &&
       currentlyCounting == true // If the interval is already launched
     ) {
@@ -96,7 +96,7 @@ let currentlyCounting = false; // Start / Stop interval
     // If all tabs from tabToUrl are closed, clear interval
     if (Object.entries(tabToUrl).length === 0) {
       clearInterval(interval);
-      storage.setItem("time", time);
+      storage.setItem('time', time);
     }
   });
 })();

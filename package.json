@@ -20,7 +20,7 @@
   "homepage": "https://github.com/Icesofty/1hour#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "prettier -w *.(js,json)"
+      "pre-commit": "prettier -w ./app/*js ./app/*.json"
     }
   },
   "devDependencies": {
