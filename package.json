@@ -1,0 +1,20 @@
+{
+  "name": "1hour",
+  "version": "1.0.0",
+  "description": "![1hour Chrome extension](./1hourbanner.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthureichelberger/1hour.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arthureichelberger/1hour/issues"
+  },
+  "homepage": "https://github.com/arthureichelberger/1hour#readme"
+}
