@@ -25,7 +25,7 @@ function setWebsite() {
       console.log(result["websites"]);
       updateList(result["websites"]);
     }
-    chrome.storage.local.set(result);
+    chrome.storage.local.set({websites: result['websites']});
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
@@ -107,7 +107,7 @@ function removeFromLocal(e) {
       updateList(result["websites"]);
     }
     result["websites"].splice(e, 1, " ");
-    chrome.storage.local.set(result);
+    chrome.storage.local.set({websites: result['websites']});
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
@@ -136,7 +136,9 @@ function removeFromLocal(e) {
 }
 
 function reload() {
-  chrome.runtime.reload();
+  chrome.storage.local.set({time: 0}, () => {
+    chrome.runtime.reload();
+  })
 }
 
 // Remove elements from list when clicked
