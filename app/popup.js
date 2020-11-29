@@ -15,17 +15,15 @@ function setWebsite() {
       result["websites"] instanceof Array
     ) {
       result["websites"].push(log);
-      console.log(result["websites"]);
       for (r in result["websites"]) {
         myURLsRedirect.push("*://*." + result["websites"][r] + "/*");
       }
       updateList(result["websites"]);
     } else {
       result["websites"] = [log];
-      console.log(result["websites"]);
       updateList(result["websites"]);
     }
-    chrome.storage.local.set({websites: result['websites']});
+    chrome.storage.local.set({ websites: result["websites"] });
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
@@ -107,7 +105,7 @@ function removeFromLocal(e) {
       updateList(result["websites"]);
     }
     result["websites"].splice(e, 1, " ");
-    chrome.storage.local.set({websites: result['websites']});
+    chrome.storage.local.set({ websites: result["websites"] });
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
@@ -136,9 +134,9 @@ function removeFromLocal(e) {
 }
 
 function reload() {
-  chrome.storage.local.set({time: 0}, () => {
+  chrome.storage.local.set({ time: 0 }, () => {
     chrome.runtime.reload();
-  })
+  });
 }
 
 // Remove elements from list when clicked

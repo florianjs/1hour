@@ -30,3 +30,6 @@ To contribute, fork this repo and then create a PR.
 # Wall of fame
 
 ## They have contributed to this project 🏆
+
+<a href="https://github.com/arthureichelberger"><img src="https://avatars2.githubusercontent.com/u/35616365?s=460&u=0edebf2c5920474ab0dff4953fd41d2b9b0bfd6b&v=4" alt="Arthur EICHELBERGER" width="100"/></a>
+<a href="https://github.com/Icesofty"><img src="https://avatars1.githubusercontent.com/u/52180080?s=460&u=5ff4db3ace5050d8bd38cb01338df3e17cfe830e&v=4" alt="Florian ARGAUD" width="100"/></a>
