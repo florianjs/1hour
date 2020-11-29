@@ -27,11 +27,9 @@ function setWebsite() {
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
-        if (true) {
           return {
             redirectUrl: 'https://one-hour-long.glitch.me/'
           };
-        }
       },
       {
         urls: [...myURLsRedirect],
@@ -109,11 +107,9 @@ function removeFromLocal(e) {
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
-        if (true) {
           return {
             redirectUrl: 'https://one-hour-long.glitch.me/'
           };
-        }
       },
       {
         urls: [...myURLsRedirect],

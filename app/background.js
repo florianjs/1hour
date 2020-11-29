@@ -1,11 +1,11 @@
 let interval;
 // myURLs contains the blocked websites
 // Format : myURLs = ["tailwindcss.com", "google.com"];
-const myURLs = [];
+let myURLs = [];
 
 // myURLsRedirect contains the blocked websites
 // Format : myURLsRedirect = ["*://*.tailwindcss.com/*", "*://*.google.com/*"];
-const myURLsRedirect = [];
+let myURLsRedirect = [];
 
 /** Init Storage. */
 const storage = Storage();
