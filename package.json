@@ -4,7 +4,8 @@
   "description": "Clean some brain memory, stay focused and stop procrastinating.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettify": "prettier -w **/*.js **/*.json"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/Icesofty/1hour/issues"
   },
-  "homepage": "https://github.com/Icesofty/1hour#readme"
+  "homepage": "https://github.com/Icesofty/1hour#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier -w *.(js,json)"
+    }
+  },
+  "devDependencies": {
+    "husky": "^4.3.0",
+    "prettier": "^2.2.1"
+  }
 }
