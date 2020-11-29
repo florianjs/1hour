@@ -1,0 +1,30 @@
+{
+  "name": "1hour",
+  "version": "1.0.0",
+  "description": "Clean some brain memory, stay focused and stop procrastinating.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettify": "prettier -w **/*.js **/*.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Icesofty/1hour.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Icesofty/1hour/issues"
+  },
+  "homepage": "https://github.com/Icesofty/1hour#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier -w ./app/*js ./app/*.json"
+    }
+  },
+  "devDependencies": {
+    "husky": "^4.3.0",
+    "prettier": "^2.2.1"
+  }
+}
