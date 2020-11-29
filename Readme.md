@@ -23,6 +23,7 @@ Once installed, open the extension, add unproductive websites to your list, and 
 All contributors will be part of the "Wall of fame," with their names and links to their GH account.
 
 To contribute, fork this repo and then create a PR.
+Once cloned, don't forget to run `npm i`
 
 - Check opened issues
 - Issues / PR / Comments NEEDS to be in plain English
