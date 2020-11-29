@@ -136,7 +136,9 @@ function removeFromLocal(e) {
 }
 
 function reload() {
-  chrome.runtime.reload();
+  chrome.storage.local.set({time: 0}, () => {
+    chrome.runtime.reload();
+  })
 }
 
 // Remove elements from list when clicked
