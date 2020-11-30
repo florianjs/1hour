@@ -13,12 +13,20 @@ const storage = Storage();
 const tabToUrl = {}; // Monitor currently Tabs opened
 let currentlyCounting = false; // Start / Stop interval
 
+/** Set the last update to reset timer every day */
+let today = new Date().toLocaleDateString(); // set today's date
+let lastUpdate;
+
 /**
  * Get urls stored in the Chrome Local Storage and hydrate
  * the myURLs & myURLsRedirect variables.
  */
 (async () => {
   const websites = await storage.getItem('websites');
+
+  lastUpdate = await storage.getItem('lastUpdate'); // get the date of the last timer update
+  lastUpdate ? lastUpdate : lastUpdate = today; // if doesn't exist, set today's date as last update
+
   let time = (await storage.getItem('time')) || 0; // Time spent on myURLs
 
   if (websites instanceof Array) {
@@ -29,8 +37,12 @@ let currentlyCounting = false; // Start / Stop interval
 
     chrome.webRequest.onBeforeRequest.addListener(
       () => {
-        // If time is more than 1 hour
-        if (time > 3600) {
+        // If last update is not today, reset timer to 0
+        if (lastUpdate != today) {
+          time = 0;
+        }
+        // else, if time is more than 1 hour and lastUpdate is today
+        else if (time > 3600 && lastUpdate === today) {
           return {
             // Redirect
             redirectUrl: 'https://one-hour-long.glitch.me/'
@@ -97,6 +109,7 @@ let currentlyCounting = false; // Start / Stop interval
     if (Object.entries(tabToUrl).length === 0) {
       clearInterval(interval);
       storage.setItem('time', time);
+      storage.setItem('lastUpdate', lastUpdate);
     }
   });
 })();
