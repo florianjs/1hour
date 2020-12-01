@@ -54,8 +54,8 @@ let currentlyCounting = false; // Start / Stop interval
     );
   } else {
     // If "websites" doesn't exist in Local Storage
-    myURLs = ['facebook.com', 'twitter.com'];
-    myURLsRedirect = ['*://*.facebook.com/*', '*://*.twitter.com/*'];
+    myURLs = ['facebook.com', 'twitter.com', 'youtube.com'];
+    myURLsRedirect = ['*://*.facebook.com/*', '*://*.twitter.com/*', '*://*.youtube.com/*'];
   }
 
   // Everytime a Tab is updated
