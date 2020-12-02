@@ -7,7 +7,6 @@ const DateHelper = () => {
      * Get today's date.
      */
     const getCurrentDate = () => {
-        console.log(new Date().toLocaleDateString());
         return new Date().toLocaleDateString();
     };
 
