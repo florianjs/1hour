@@ -1,5 +1,5 @@
 /**
- * Abstracting the Chrome Storage.
+ * DateHelper
  */
 const DateHelper = () => {
 
