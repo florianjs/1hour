@@ -9,13 +9,12 @@ let myURLsRedirect = [];
 
 /** Init Storage. */
 const storage = Storage();
+/** Init Date helper */
+const dateHelper = DateHelper();
 
 const tabToUrl = {}; // Monitor currently Tabs opened
 let currentlyCounting = false; // Start / Stop interval
 
-/** Set the last update to reset timer every day */
-let today = new Date().toLocaleDateString(); // set today's date
-let lastUpdate;
 
 /**
  * Get urls stored in the Chrome Local Storage and hydrate
@@ -23,11 +22,17 @@ let lastUpdate;
  */
 (async () => {
   const websites = await storage.getItem('websites');
-
-  lastUpdate = await storage.getItem('lastUpdate'); // get the date of the last timer update
-  lastUpdate ? lastUpdate : lastUpdate = today; // if doesn't exist, set today's date as last update
-
+  const lastUpdate = await storage.getItem('lastUpdate'); // get the date of the last timer update
   let time = (await storage.getItem('time')) || 0; // Time spent on myURLs
+  if (!lastUpdate) {
+    await storage.setItem('lastUpdate', dateHelper.getCurrentDate()); // set last update in storage
+  } else {
+    if (!dateHelper.compare("03/12/2020")) {
+      await storage.setItem('lastUpdate', dateHelper.getCurrentDate());
+      time = 0;
+      await storage.setItem('time', time);
+    }
+  }
 
   if (websites instanceof Array) {
     websites.forEach((website) => {
@@ -37,12 +42,8 @@ let lastUpdate;
 
     chrome.webRequest.onBeforeRequest.addListener(
       () => {
-        // If last update is not today, reset timer to 0
-        if (lastUpdate != today) {
-          time = 0;
-        }
         // else, if time is more than 1 hour and lastUpdate is today
-        else if (time > 3600 && lastUpdate === today) {
+        if (time > 3600) {
           return {
             // Redirect
             redirectUrl: 'https://one-hour-long.glitch.me/'
@@ -109,7 +110,6 @@ let lastUpdate;
     if (Object.entries(tabToUrl).length === 0) {
       clearInterval(interval);
       storage.setItem('time', time);
-      storage.setItem('lastUpdate', lastUpdate);
     }
   });
 })();

@@ -15,7 +15,7 @@
   "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" },
   "manifest_version": 2,
   "background": {
-    "scripts": ["helpers/Storage.js", "background.js"],
+    "scripts": ["helpers/Storage.js", "helpers/DateHelper.js", "background.js"],
     "persistent": true
   },
   "browser_action": {
