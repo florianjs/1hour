@@ -27,7 +27,7 @@ let currentlyCounting = false; // Start / Stop interval
   if (!lastUpdate) {
     await storage.setItem('lastUpdate', dateHelper.getCurrentDate()); // set last update in storage
   } else {
-    if (!dateHelper.compare("03/12/2020")) {
+    if (!dateHelper.compare(lastUpdate)) {
       await storage.setItem('lastUpdate', dateHelper.getCurrentDate());
       time = 0;
       await storage.setItem('time', time);
