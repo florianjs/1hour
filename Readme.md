@@ -34,6 +34,7 @@ Once cloned, don't forget to run `npm i`
 
 ## They have contributed to this project 🏆
 
+<a href="https://github.com/Elya29"><img src="https://avatars2.githubusercontent.com/u/52247724?s=460&u=a951d2045b6941f261f7c1c3a7e77c4a31cc2cbb&v=4" alt="Elya" width="100"/></a>
 <a href="https://github.com/arthureichelberger"><img src="https://avatars2.githubusercontent.com/u/35616365?s=460&u=0edebf2c5920474ab0dff4953fd41d2b9b0bfd6b&v=4" alt="Arthur EICHELBERGER" width="100"/></a>
 <a href="https://github.com/Icesofty"><img src="https://avatars1.githubusercontent.com/u/52180080?s=460&u=5ff4db3ace5050d8bd38cb01338df3e17cfe830e&v=4" alt="Florian ARGAUD" width="100"/></a>
 <a href="https://github.com/qtbrin"><img src="https://avatars2.githubusercontent.com/u/75215560?s=460&v=4" alt="qtbrin" width="100"/></a>
