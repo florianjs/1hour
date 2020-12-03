@@ -4,15 +4,13 @@
 
 1hour is an Open Source Chromium extension that helps you stay focus all day long ⏲.
 
-If you spend more than 1 hour procrastinating on unproductive websites, the extension will block access to those websites and redirect you to [a webpage to pump up your motivation 💪](https://one-hour-long.glitch.me/)
+If you spend more than 1 hour procrastinating on unproductive websites, the extension will block access to those websites and redirect you to [a webpage to pump up your motivation 💪](https://one-hour-long.glitch.me/). The timer will be reset every day, or you can manually reset it with the "Reload" button.
 
 ## How to
 
 ![How To 1 hour extension](/howto.gif)
 
-❗ This extension is currently under review in the Chrome Dev Store. ❗
-
-To install this extension, clone or fork this repo. Once downloaded, go to [chrome://extensions](chrome://extensions) and drag and drop the "app" folder.
+To install the last version of this extension, clone or fork this repo. Once downloaded, go to [chrome://extensions](chrome://extensions) and drag and drop the "app" folder.
 
 Once installed, open the extension, add unproductive websites to your list, and then "Reload" the extension.
 
