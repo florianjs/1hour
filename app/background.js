@@ -9,9 +9,12 @@ let myURLsRedirect = [];
 
 /** Init Storage. */
 const storage = Storage();
+/** Init Date helper */
+const dateHelper = DateHelper();
 
 const tabToUrl = {}; // Monitor currently Tabs opened
 let currentlyCounting = false; // Start / Stop interval
+
 
 /**
  * Get urls stored in the Chrome Local Storage and hydrate
@@ -19,7 +22,17 @@ let currentlyCounting = false; // Start / Stop interval
  */
 (async () => {
   const websites = await storage.getItem('websites');
+  const lastUpdate = await storage.getItem('lastUpdate'); // get the date of the last timer update
   let time = (await storage.getItem('time')) || 0; // Time spent on myURLs
+  if (!lastUpdate) {
+    await storage.setItem('lastUpdate', dateHelper.getCurrentDate()); // set last update in storage
+  } else {
+    if (!dateHelper.compare(lastUpdate)) {
+      await storage.setItem('lastUpdate', dateHelper.getCurrentDate());
+      time = 0;
+      await storage.setItem('time', time);
+    }
+  }
 
   if (websites instanceof Array) {
     websites.forEach((website) => {
@@ -29,7 +42,7 @@ let currentlyCounting = false; // Start / Stop interval
 
     chrome.webRequest.onBeforeRequest.addListener(
       () => {
-        // If time is more than 1 hour
+        // else, if time is more than 1 hour and lastUpdate is today
         if (time > 3600) {
           return {
             // Redirect
