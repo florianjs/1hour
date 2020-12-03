@@ -3,6 +3,10 @@ const myURLsRedirect = []; // List of websites add by user
 
 document.querySelector('#inputVal').addEventListener('keyup', updateValue);
 
+const counter = document.querySelector('#counter');
+
+const dateHelper = DateHelper();
+
 function updateValue(e) {
   log = e.target.value;
 }
@@ -27,9 +31,9 @@ function setWebsite() {
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
-          return {
-            redirectUrl: 'https://one-hour-long.glitch.me/'
-          };
+        return {
+          redirectUrl: 'https://one-hour-long.glitch.me/'
+        };
       },
       {
         urls: [...myURLsRedirect],
@@ -107,9 +111,9 @@ function removeFromLocal(e) {
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
-          return {
-            redirectUrl: 'https://one-hour-long.glitch.me/'
-          };
+        return {
+          redirectUrl: 'https://one-hour-long.glitch.me/'
+        };
       },
       {
         urls: [...myURLsRedirect],
@@ -147,3 +151,9 @@ document.getElementById('itemlist').addEventListener('click', function (e) {
 
 // Reload the extension
 document.getElementById('reload').addEventListener('click', reload);
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  const timeLeft = dateHelper.getTimeLeft(request.counter);
+  counter.innerHTML = timeLeft
+
+});

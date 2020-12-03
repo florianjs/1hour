@@ -15,7 +15,6 @@ const dateHelper = DateHelper();
 const tabToUrl = {}; // Monitor currently Tabs opened
 let currentlyCounting = false; // Start / Stop interval
 
-
 /**
  * Get urls stored in the Chrome Local Storage and hydrate
  * the myURLs & myURLsRedirect variables.
@@ -83,6 +82,7 @@ let currentlyCounting = false; // Start / Stop interval
       // Start interval to increase time by 1 every seconds
       interval = setInterval(() => {
         time++;
+        chrome.runtime.sendMessage({ counter: time });
       }, 1000);
     }
     if (

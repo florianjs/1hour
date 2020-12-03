@@ -18,6 +18,21 @@ const DateHelper = () => {
         return date === getCurrentDate();
     };
 
-    return { getCurrentDate, compare }
+    /**
+     *
+     * @param {number} timer
+     * @param {number} delay
+     */
+    const getTimeLeft = (timer, delay) => {
+      const timeLeft = delay -timer;
+      const hours = Math.floor(timeLeft / 3600);
+      const minutes = Math.floor(timeLeft % 60);
+      const seconds = timeLeft - minutes * 60;
+      return `${hours ? hours + "h " : ""}${minutes ? minutes + "min " : ""}${seconds}s`
+
+    }
+
+
+    return { getCurrentDate, compare, getTimeLeft }
 
 }
