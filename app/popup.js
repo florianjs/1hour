@@ -154,6 +154,5 @@ document.getElementById('reload').addEventListener('click', reload);
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   const timeLeft = dateHelper.getTimeLeft(request.counter);
-  counter.innerHTML = timeLeft
-
+  counter.innerHTML = timeLeft;
 });
