@@ -2,6 +2,7 @@
  * DateHelper
  */
 const DateHelper = () => {
+
   /**
    * Get today's date.
    */

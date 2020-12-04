@@ -119,7 +119,6 @@ let currentlyCounting = false; // Start / Stop interval
     // If all tabs from tabToUrl are closed, clear interval
     if (Object.entries(tabToUrl).length === 0) {
       clearInterval(interval);
-      chrome.runtime.sendMessage({ counter: 'stop', time });
       storage.setItem('time', time);
     }
   });

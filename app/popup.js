@@ -158,7 +158,7 @@ let timerCountInterval;
 
 /*
   each time the popup is opened,
-  it asks background.js to send him informations
+  it asks background.js to send informations
 */
 chrome.runtime.sendMessage({ status: 'ready' }, (response) => {
   if (response.status === 'received')
