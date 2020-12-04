@@ -7,7 +7,7 @@ const DateHelper = () => {
    * Get today's date.
    */
   const getCurrentDate = () => {
-    return new Date().toLocaleDateString();
+      return new Date().toLocaleDateString();
   };
 
   /**
@@ -15,8 +15,9 @@ const DateHelper = () => {
    * @param {string} date
    */
   const compare = (date) => {
-    return date === getCurrentDate();
+      return date === getCurrentDate();
   };
 
-  return { getCurrentDate, compare };
-};
+  return { getCurrentDate, compare }
+
+}
