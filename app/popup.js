@@ -1,11 +1,10 @@
+import { getColorLevels } from '/helpers/get-color-levels.js';
+import { getTimeLeft } from '/helpers/get-time-left.js';
+
 let log; // Input from user
 const myURLsRedirect = []; // List of websites add by user
 
 document.querySelector('#inputVal').addEventListener('keyup', updateValue);
-
-const counter = document.querySelector('#counter');
-
-const dateHelper = DateHelper();
 
 function updateValue(e) {
   log = e.target.value;
@@ -152,7 +151,39 @@ document.getElementById('itemlist').addEventListener('click', function (e) {
 // Reload the extension
 document.getElementById('reload').addEventListener('click', reload);
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  const timeLeft = dateHelper.getTimeLeft(request.counter);
-  counter.innerHTML = timeLeft;
+// Handle Timer
+
+const timerCount = document.querySelector('#time-counter');
+let timerCountInterval;
+
+/*
+  each time the popup is opened,
+  it asks background.js to send him informations
+*/
+chrome.runtime.sendMessage({ status: 'ready' }, (response) => {
+  if (response.status === 'received')
+    chrome.runtime.onMessage.addListener(handleListenMessage);
 });
+
+function updateTimerUI(timeStamp) {
+  const colorLevels = getColorLevels(timeStamp);
+  if (timerCount.classList.contains(colorLevels.delete))
+    timerCount.classList.remove(colorLevels.delete);
+  if (!timerCount.classList.contains(colorLevels.add))
+    timerCount.classList.add(colorLevels.add);
+  const timeLeft = getTimeLeft(timeStamp, 3600);
+  timerCount.innerHTML = timeLeft;
+}
+
+function handleListenMessage(request) {
+  if (request.counter === 'start') {
+    let timeStamp = request.time;
+    timerCountInterval = setInterval(() => {
+      updateTimerUI(timeStamp);
+      timeStamp++;
+    }, 1000);
+  } else if (request.counter === 'stop') {
+    clearInterval(timerCountInterval);
+    timerCount.innerHTML = '';
+  }
+}

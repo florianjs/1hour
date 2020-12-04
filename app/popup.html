@@ -12,7 +12,7 @@
       Clean some brain memory. <br />
       Stay focused and stop procrastinating.
     </h1>
-    <p id="counter" class="font-bold blue-200"></p>
+    <p id="time-counter" class="mt-2 text-center font-bold text-2xl"></p>
     <div class="flex flex-col justify-center m-8">
       <div class="flex mb-2">
         <input
@@ -58,7 +58,9 @@
         Reload the app when you add a new website
       </p>
     </div>
-    <script src="popup.js"></script>
+    <script type="module" src="./helpers/get-color-levels.js"></script>
+    <script type="module" src="./helpers/get-time-left.js"></script>
+    <script type="module" src="popup.js"></script>
   </body>
 </html>
 

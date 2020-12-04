@@ -82,7 +82,6 @@ let currentlyCounting = false; // Start / Stop interval
       // Start interval to increase time by 1 every seconds
       interval = setInterval(() => {
         time++;
-        chrome.runtime.sendMessage({ counter: time });
       }, 1000);
     }
     if (
@@ -91,6 +90,17 @@ let currentlyCounting = false; // Start / Stop interval
       currentlyCounting == true // If the interval is already launched
     ) {
       tabToUrl[tabId] = tab.url;
+    }
+  });
+
+  // Receive signal of availability of popup.js
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    sendResponse({ status: 'received' });
+    if (request.status === 'ready') {
+      chrome.runtime.sendMessage({
+        counter: currentlyCounting ? 'start' : 'stop',
+        time
+      });
     }
   });
 
@@ -109,6 +119,7 @@ let currentlyCounting = false; // Start / Stop interval
     // If all tabs from tabToUrl are closed, clear interval
     if (Object.entries(tabToUrl).length === 0) {
       clearInterval(interval);
+      chrome.runtime.sendMessage({ counter: 'stop', time });
       storage.setItem('time', time);
     }
   });
