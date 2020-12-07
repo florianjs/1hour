@@ -166,6 +166,10 @@ chrome.runtime.sendMessage({ status: 'ready' }, (response) => {
 });
 
 function updateTimerUI(timeStamp) {
+  if (timeStamp === 3600) {
+    clearInterval(timerCountInterval);
+  }
+
   const colorLevels = getColorLevels(timeStamp);
   if (timerCount.classList.contains(colorLevels.delete))
     timerCount.classList.remove(colorLevels.delete);
