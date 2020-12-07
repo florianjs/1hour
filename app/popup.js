@@ -18,7 +18,7 @@ function setWebsite() {
       result['websites'] instanceof Array
     ) {
       result['websites'].push(log);
-      for (r in result['websites']) {
+      for (const r in result['websites']) {
         myURLsRedirect.push('*://*.' + result['websites'][r] + '/*');
       }
       updateList(result['websites']);
