@@ -12,6 +12,7 @@
       Clean some brain memory. <br />
       Stay focused and stop procrastinating.
     </h1>
+    <p id="time-counter" class="mt-2 text-center font-bold text-2xl"></p>
     <div class="flex flex-col justify-center m-8">
       <div class="flex mb-2">
         <input
@@ -37,10 +38,10 @@
 
     <div class="flex flex-col justify-center">
       <button
-        id="reload"
+        id="reset"
         class="bg-indigo-500 flex items-center p-4 uppercase shadow-md text-white text-xl rounded-md mx-auto m-4 transform duration-150 ease-in-out hover:shadow-lg hover:scale-105"
       >
-        RELOAD
+        RESET
         <svg
           class="fill-current text-white mx-2"
           xmlns="http://www.w3.org/2000/svg"
@@ -53,16 +54,15 @@
           />
         </svg>
       </button>
-      <p class="text-gray-500 text-xs text-center">
-        Reload the app when you add a new website
+      <p class="text-gray-500 text-xs text-center mb-4">
+        Reset the timer to 0 for the day
       </p>
     </div>
-
-    <script src="popup.js"></script>
+    <script type="module" src="popup.js"></script>
   </body>
 </html>
 
-<!-- 
+<!--
 
     - L'utilisateur installe l'extension
     - il choisis des sites à bloquer lors de la premiére ouverture -Une liste pré-définis peut être proposé (Linkedin, Facebook, Twitter, Gmail, Youtube, etc... )

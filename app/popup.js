@@ -1,3 +1,6 @@
+import { getColorLevels } from '/helpers/get-color-levels.js';
+import { getTimeLeft } from '/helpers/get-time-left.js';
+
 let log; // Input from user
 const myURLsRedirect = []; // List of websites add by user
 
@@ -15,7 +18,7 @@ function setWebsite() {
       result['websites'] instanceof Array
     ) {
       result['websites'].push(log);
-      for (r in result['websites']) {
+      for (const r in result['websites']) {
         myURLsRedirect.push('*://*.' + result['websites'][r] + '/*');
       }
       updateList(result['websites']);
@@ -27,9 +30,9 @@ function setWebsite() {
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
-          return {
-            redirectUrl: 'https://one-hour-long.glitch.me/'
-          };
+        return {
+          redirectUrl: 'https://one-hour-long.glitch.me/'
+        };
       },
       {
         urls: [...myURLsRedirect],
@@ -47,6 +50,7 @@ function setWebsite() {
       ['blocking']
     );
   });
+  reload();
 }
 
 function updateList(list) {
@@ -107,9 +111,9 @@ function removeFromLocal(e) {
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
-          return {
-            redirectUrl: 'https://one-hour-long.glitch.me/'
-          };
+        return {
+          redirectUrl: 'https://one-hour-long.glitch.me/'
+        };
       },
       {
         urls: [...myURLsRedirect],
@@ -129,10 +133,21 @@ function removeFromLocal(e) {
   });
 }
 
-function reload() {
-  chrome.storage.local.set({ time: 0 }, () => {
-    chrome.runtime.reload();
-  });
+function reload(resetTimer = false) {
+  if (resetTimer) {
+    chrome.storage.local.set({ time: 0 }, () => {
+      chrome.runtime.reload();
+    });
+  } else {
+    chrome.storage.local.get((data) => {
+      // Get the current timer
+      const timer = data['time'];
+      // On reload, set the timer back to its value instead of 0
+      chrome.storage.local.set({ time: timer }, () => {
+        chrome.runtime.reload();
+      });
+    });
+  }
 }
 
 // Remove elements from list when clicked
@@ -143,7 +158,50 @@ document.getElementById('itemlist').addEventListener('click', function (e) {
   if (tgt.tagName.toUpperCase() == 'LI') {
     tgt.parentNode.removeChild(tgt); // or tgt.remove();
   }
+  reload();
 });
 
 // Reload the extension
-document.getElementById('reload').addEventListener('click', reload);
+document.getElementById('reset').addEventListener('click', () => reload(true));
+
+
+// Handle Timer
+
+const timerCount = document.querySelector('#time-counter');
+let timerCountInterval;
+
+/*
+  each time the popup is opened,
+  it asks background.js to send informations
+*/
+chrome.runtime.sendMessage({ status: 'ready' }, (response) => {
+  if (response.status === 'received')
+    chrome.runtime.onMessage.addListener(handleListenMessage);
+});
+
+function updateTimerUI(timeStamp) {
+  if (timeStamp === 3600) {
+    clearInterval(timerCountInterval);
+  }
+
+  const colorLevels = getColorLevels(timeStamp);
+  if (timerCount.classList.contains(colorLevels.delete))
+    timerCount.classList.remove(colorLevels.delete);
+  if (!timerCount.classList.contains(colorLevels.add))
+    timerCount.classList.add(colorLevels.add);
+  const timeLeft = getTimeLeft(timeStamp, 3600);
+  timerCount.innerHTML = timeLeft;
+}
+
+function handleListenMessage(request) {
+  if (request.counter === 'start') {
+    let timeStamp = request.time;
+    timerCountInterval = setInterval(() => {
+      updateTimerUI(timeStamp);
+      timeStamp++;
+    }, 1000);
+  } else if (request.counter === 'stop') {
+    clearInterval(timerCountInterval);
+    timerCount.innerHTML = '';
+  }
+}
