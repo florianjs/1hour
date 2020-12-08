@@ -32,6 +32,8 @@ Once cloned, don't forget to run `npm i`
 
 ## They have contributed to this project 🏆
 
+<a href="https://github.com/nterol"><img src="https://avatars2.githubusercontent.com/u/24438131?s=400&u=a1e2968112a5df2bd5b85415a9aafde85e38223c&v=4" alt="Nicolas Terol" width="100"/></a>
+<a href="https://github.com/pchatard"><img src="https://avatars3.githubusercontent.com/u/39740196?s=400&u=83b4fe68487ae594d5ca3b226a31a182979598ca&v=4" alt="Pierre" width="100"/></a>
 <a href="https://github.com/Elya29"><img src="https://avatars2.githubusercontent.com/u/52247724?s=460&u=a951d2045b6941f261f7c1c3a7e77c4a31cc2cbb&v=4" alt="Elya" width="100"/></a>
 <a href="https://github.com/arthureichelberger"><img src="https://avatars2.githubusercontent.com/u/35616365?s=460&u=0edebf2c5920474ab0dff4953fd41d2b9b0bfd6b&v=4" alt="Arthur EICHELBERGER" width="100"/></a>
 <a href="https://github.com/Icesofty"><img src="https://avatars1.githubusercontent.com/u/52180080?s=460&u=5ff4db3ace5050d8bd38cb01338df3e17cfe830e&v=4" alt="Florian ARGAUD" width="100"/></a>
