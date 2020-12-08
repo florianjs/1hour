@@ -27,9 +27,9 @@ function setWebsite() {
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
-          return {
-            redirectUrl: 'https://one-hour-long.glitch.me/'
-          };
+        return {
+          redirectUrl: 'https://one-hour-long.glitch.me/'
+        };
       },
       {
         urls: [...myURLsRedirect],
@@ -47,6 +47,7 @@ function setWebsite() {
       ['blocking']
     );
   });
+  reload();
 }
 
 function updateList(list) {
@@ -107,9 +108,9 @@ function removeFromLocal(e) {
     // Everytime we updagte the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
-          return {
-            redirectUrl: 'https://one-hour-long.glitch.me/'
-          };
+        return {
+          redirectUrl: 'https://one-hour-long.glitch.me/'
+        };
       },
       {
         urls: [...myURLsRedirect],
@@ -129,10 +130,21 @@ function removeFromLocal(e) {
   });
 }
 
-function reload() {
-  chrome.storage.local.set({ time: 0 }, () => {
-    chrome.runtime.reload();
-  });
+function reload(resetTimer = false) {
+  if (resetTimer) {
+    chrome.storage.local.set({ time: 0 }, () => {
+      chrome.runtime.reload();
+    });
+  } else {
+    chrome.storage.local.get((data) => {
+      // Get the current timer
+      const timer = data['time'];
+      // On reload, set the timer back to its value instead of 0
+      chrome.storage.local.set({ time: timer }, () => {
+        chrome.runtime.reload();
+      });
+    });
+  }
 }
 
 // Remove elements from list when clicked
@@ -143,7 +155,8 @@ document.getElementById('itemlist').addEventListener('click', function (e) {
   if (tgt.tagName.toUpperCase() == 'LI') {
     tgt.parentNode.removeChild(tgt); // or tgt.remove();
   }
+  reload();
 });
 
 // Reload the extension
-document.getElementById('reload').addEventListener('click', reload);
+document.getElementById('reset').addEventListener('click', () => reload(true));
