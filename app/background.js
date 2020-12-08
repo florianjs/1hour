@@ -15,7 +15,6 @@ const dateHelper = DateHelper();
 const tabToUrl = {}; // Monitor currently Tabs opened
 let currentlyCounting = false; // Start / Stop interval
 
-
 /**
  * Get urls stored in the Chrome Local Storage and hydrate
  * the myURLs & myURLsRedirect variables.
@@ -91,6 +90,17 @@ let currentlyCounting = false; // Start / Stop interval
       currentlyCounting == true // If the interval is already launched
     ) {
       tabToUrl[tabId] = tab.url;
+    }
+  });
+
+  // Receive signal of availability of popup.js
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    sendResponse({ status: 'received' });
+    if (request.status === 'ready') {
+      chrome.runtime.sendMessage({
+        counter: currentlyCounting ? 'start' : 'stop',
+        time
+      });
     }
   });
 
