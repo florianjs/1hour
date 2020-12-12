@@ -4,7 +4,14 @@ import { getTimeLeft } from '/helpers/get-time-left.js';
 let log; // Input from user
 const myURLsRedirect = []; // List of websites add by user
 
-document.querySelector('#inputVal').addEventListener('keyup', updateValue);
+document.querySelector('#inputVal').addEventListener('keyup', (e) => {
+  updateValue();
+  const key = e.which || e.keyCode;
+  const symbol = e.key;
+  if (key === 13 || symbol === 'Enter') {
+    setWebsite();
+  }
+});
 
 function updateValue(e) {
   log = e.target.value;
@@ -163,7 +170,6 @@ document.getElementById('itemlist').addEventListener('click', function (e) {
 
 // Reload the extension
 document.getElementById('reset').addEventListener('click', () => reload(true));
-
 
 // Handle Timer
 
