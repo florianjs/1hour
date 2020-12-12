@@ -5,7 +5,7 @@ let log; // Input from user
 const myURLsRedirect = []; // List of websites add by user
 
 document.querySelector('#inputVal').addEventListener('keyup', (e) => {
-  updateValue();
+  updateValue(e);
   const key = e.which || e.keyCode;
   const symbol = e.key;
   if (key === 13 || symbol === 'Enter') {
