@@ -1,5 +1,6 @@
 import { getColorLevels } from '/helpers/get-color-levels.js';
 import { getTimeLeft } from '/helpers/get-time-left.js';
+import { displayErrorMessage } from '/helpers/displayErrorMessage.js';
 
 let log; // Input from user
 const myURLsRedirect = []; // List of websites add by user
@@ -19,22 +20,31 @@ function updateValue(e) {
 
 // When user click on "Add"
 function setWebsite() {
+  let error = false;
   chrome.storage.local.get(function (result) {
     if (
       typeof result['websites'] !== 'undefined' &&
       result['websites'] instanceof Array
     ) {
-      result['websites'].push(log);
-      for (const r in result['websites']) {
-        myURLsRedirect.push('*://*.' + result['websites'][r] + '/*');
+      // Check if website is already in list
+      if (result['websites'].includes(log) === true) {
+        // If already in list, display error message
+        displayErrorMessage('Already in your list !');
+        document.getElementById('inputVal').focus();
+        error = true; // prevents closing popup
+      } else {
+        result['websites'].push(log);
+        for (const r in result['websites']) {
+          myURLsRedirect.push('*://*.' + result['websites'][r] + '/*');
+        }
+        updateList(result['websites']);
       }
-      updateList(result['websites']);
     } else {
       result['websites'] = [log];
       updateList(result['websites']);
     }
     chrome.storage.local.set({ websites: result['websites'] });
-    // Everytime we updagte the list, we block the elements
+    // Everytime we update the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
         return {
@@ -56,8 +66,10 @@ function setWebsite() {
       },
       ['blocking']
     );
+    if (error === false) {
+      reload();
+    }
   });
-  reload();
 }
 
 function updateList(list) {
