@@ -21,55 +21,64 @@ function updateValue(e) {
 // When user click on "Add"
 function setWebsite() {
   let error = false;
-  chrome.storage.local.get(function (result) {
-    if (
-      typeof result['websites'] !== 'undefined' &&
-      result['websites'] instanceof Array
-    ) {
-      // Check if website is already in list
-      if (result['websites'].includes(log) === true) {
-        // If already in list, display error message
-        displayErrorMessage('Already in your list !');
-        document.getElementById('inputVal').focus();
-        error = true; // prevents closing popup
-      } else {
-        result['websites'].push(log);
-        for (const r in result['websites']) {
-          myURLsRedirect.push('*://*.' + result['websites'][r] + '/*');
+  log = log.trim();
+  // Check if input is not empty or filled with blanks and display error message
+  if (log.length === 0) {
+    error = true;
+    displayErrorMessage('Input cannot be empty or filled with blanks only...');
+    document.getElementById('inputVal').focus();
+  }
+  else {
+    chrome.storage.local.get(function (result) {
+      if (
+        typeof result['websites'] !== 'undefined' &&
+        result['websites'] instanceof Array
+      ) {
+        // Check if website is already in list
+        if (result['websites'].includes(log)) {
+          // If already in list, display error message
+          displayErrorMessage('Already in your list !');
+          document.getElementById('inputVal').focus();
+          error = true; // prevents closing popup
+        } else {
+          result['websites'].push(log);
+          for (const r in result['websites']) {
+            myURLsRedirect.push('*://*.' + result['websites'][r] + '/*');
+          }
+          updateList(result['websites']);
         }
+      } else {
+        result['websites'] = [log];
         updateList(result['websites']);
       }
-    } else {
-      result['websites'] = [log];
-      updateList(result['websites']);
-    }
-    chrome.storage.local.set({ websites: result['websites'] });
-    // Everytime we update the list, we block the elements
-    chrome.webRequest.onBeforeRequest.addListener(
-      function (details) {
-        return {
-          redirectUrl: 'https://one-hour-long.glitch.me/'
-        };
-      },
-      {
-        urls: [...myURLsRedirect],
-        types: [
-          'main_frame',
-          'sub_frame',
-          'stylesheet',
-          'script',
-          'image',
-          'object',
-          'xmlhttprequest',
-          'other'
-        ]
-      },
-      ['blocking']
-    );
-    if (error === false) {
-      reload();
-    }
-  });
+      chrome.storage.local.set({ websites: result['websites'] });
+      // Everytime we update the list, we block the elements
+      chrome.webRequest.onBeforeRequest.addListener(
+        function (details) {
+          return {
+            redirectUrl: 'https://one-hour-long.glitch.me/'
+          };
+        },
+        {
+          urls: [...myURLsRedirect],
+          types: [
+            'main_frame',
+            'sub_frame',
+            'stylesheet',
+            'script',
+            'image',
+            'object',
+            'xmlhttprequest',
+            'other'
+          ]
+        },
+        ['blocking']
+      );
+      if (error === false) {
+        reload();
+      }
+    });
+  }
 }
 
 function updateList(list) {
