@@ -18,7 +18,7 @@
         id="errorMessage"
         class="bg-red-500 rounded-r p-2 text-white border border-red-500 m-2 font-semibold hidden">
       </p>
-      <div class="flex mb-2">
+      <form id="form" class="flex mb-2">
         <input
           id="inputVal"
           type="text"
@@ -26,12 +26,13 @@
           class="p-2 rounded-l-md border border-indigo-500 focus:ring focus:outline-none focus:ring-blue-200"
         />
         <button
+          type="submit"
           id="save"
           class="bg-indigo-500 rounded-r focus:select-none p-2 text-white border border-indigo-500 font-semibold"
         >
           ADD
         </button>
-      </div>
+      </form>
       <p class="text-gray-500 text-xs text-center">
         Without https://www and / <br />
         example : google.com

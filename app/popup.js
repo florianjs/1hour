@@ -5,18 +5,11 @@ import { displayErrorMessage } from '/helpers/displayErrorMessage.js';
 let log; // Input from user
 const myURLsRedirect = []; // List of websites add by user
 
-document.querySelector('#inputVal').addEventListener('keyup', (e) => {
-  updateValue(e);
-  const key = e.which || e.keyCode;
-  const symbol = e.key;
-  if (key === 13 || symbol === 'Enter') {
-    setWebsite();
-  }
+document.getElementById('form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  log = document.getElementById('inputVal').value;
+  setWebsite();
 });
-
-function updateValue(e) {
-  log = e.target.value;
-}
 
 // When user click on "Add"
 function setWebsite() {
@@ -95,8 +88,6 @@ function updateList(list) {
     ul.appendChild(newElement);
   }
 }
-
-document.getElementById('save').addEventListener('click', setWebsite);
 
 // Create list in DOM on launch
 function setListOnLaunch() {
