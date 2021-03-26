@@ -119,15 +119,12 @@ function removeFromLocal(e) {
       result['websites'] instanceof Array
     ) {
       result['websites'].splice(e, 1, ' ');
-      let newArray = result;
-      for (r in result['websites']) {
-        myURLsRedirect.splice(e, 1);
-      }
       updateList(result['websites']);
     }
     result['websites'].splice(e, 1, ' ');
+
     chrome.storage.local.set({ websites: result['websites'] });
-    // Everytime we updagte the list, we block the elements
+    // Everytime we update the list, we block the elements
     chrome.webRequest.onBeforeRequest.addListener(
       function (details) {
         return {
